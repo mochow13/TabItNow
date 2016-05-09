@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,104 +14,113 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.mottakin.tabitnow.AfterLoginActivity"
     tools:showIn="@layout/activity_after_login"
-    android:background="@color/highlighted_text_material_light">
+    android:background="@color/material_grey_100"
+    android:theme="@android:style/Theme.Holo">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:weightSum="2">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView"
-                android:src="@drawable/user_icon"
-                android:layout_weight="3"
-                android:foregroundGravity="center" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"
+                    android:src="@drawable/happy" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="welcome, user"
-                android:id="@+id/textView2"
-                android:layout_weight="2"
-                android:gravity="center" />
-
-            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/down"
-                android:layout_weight="3"
-                android:src="@drawable/arrow_down" />
-
-            <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/logout"
-                android:layout_weight="3"
-                android:src="@drawable/logout512" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="3">
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/welcomUserTextView"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText8"
-                android:layout_weight="1" />
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/searchTextField"
+                android:layout_gravity="bottom|center_horizontal"
+                android:gravity="bottom"
+                android:hint="Search" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="search"
-                android:id="@+id/button" />
+                android:text="GO!"
+                android:id="@+id/btnSearch"
+                android:textColor="@color/abc_primary_text_material_dark" />
+
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"></LinearLayout>
+            android:layout_height="fill_parent"
+            android:weightSum="1"
+            android:gravity="center">
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Browse"
-                android:id="@+id/button5" />
+                android:text="JOIN TOURNAMENT"
+                android:id="@+id/btnJoinTournament"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTintMode="multiply"
+                android:textColor="@color/abc_primary_text_material_dark" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Registered Tournaments"
-                android:id="@+id/button4" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:text="CREATE TOURNAMENT"
+                android:id="@+id/btnCreateTournament"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="1"></LinearLayout>
+                android:textColor="@color/abc_primary_text_material_dark" />
 
         </LinearLayout>
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="LOGOUT"
+        android:id="@+id/btnLogout"
+        android:textColor="@color/abc_primary_text_material_dark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

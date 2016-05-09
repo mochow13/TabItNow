@@ -31,11 +31,14 @@
         <activity
             android:name=".RegistrationActivity"
             android:label="@string/title_activity_registration"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".pop"
+            android:theme="@style/AppTheme.trans" />
+        <activity
+            android:name=".CreateTournamentActivity"
+            android:label="@string/title_activity_create_tournament"
             android:theme="@style/AppTheme"></activity>
-
-        <activity android:name=".pop"
-            android:theme="@style/AppTheme.trans"
-            ></activity>
     </application>
 
 </manifest>
