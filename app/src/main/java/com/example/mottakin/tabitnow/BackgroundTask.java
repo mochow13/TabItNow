@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
+import android.widget.EditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,9 +20,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -31,6 +35,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
 
     String register_url="http://192.168.10.2/loginapp/register.php";
+    String login_url="http://192.168.10.2/loginapp/login.php";
 
     Context ctx;
     Activity activity;
@@ -50,7 +55,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
         builder=new AlertDialog.Builder(activity);
         progressDialog=new ProgressDialog(ctx);
-        progressDialog.setTitle("Please Wait!");
+        progressDialog.setTitle("Please wait!");
         progressDialog.setMessage("Connecting to the server...");
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
@@ -124,6 +129,64 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             }
 
         }
+        else if(method.equals("login"))
+        {
+            try {
+                URL url=new URL(login_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String username, password;
+
+                username=params[1];
+                password=params[2];
+
+                String data=URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
+                        URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(3000);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
 
         return null;
     }
@@ -150,11 +213,22 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
             if(code.equals("reg_true"))
             {
-                showDialog("Registration Success!",message,code);
+                showDialog("Registration success!",message,code);
             }
             else if(code.equals("reg_false"))
             {
-                showDialog("Registration Failed!",message,code);
+                showDialog("Registration failed!",message,code);
+            }
+            else if(code.equals("login_true"))
+            {
+                Intent intent=new Intent(activity,AfterLoginActivity.class);
+                intent.putExtra("USER_NAME",message);
+                activity.startActivity(intent);
+            }
+            else if(code.equals("login_false"))
+            {
+                showDialog("Login failed!",message,code);
+
             }
 
         } catch (JSONException e) {
@@ -178,10 +252,28 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     activity.finish();
                 }
             });
-
-            AlertDialog alertDialog=builder.create();
-            alertDialog.show();
         }
+        else if(code.equals("login_false"))
+        {
+            builder.setMessage(message);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    EditText userName, passWord;
+
+                    userName=(EditText)activity.findViewById(R.id.usernameTextField);
+                    passWord=(EditText)activity.findViewById(R.id.passwordTextField);
+
+                    userName.setText("");
+                    passWord.setText("");
+
+                    dialog.dismiss();
+                }
+            });
+        }
+
+        AlertDialog alertDialog=builder.create();
+        alertDialog.show();
     }
 
 

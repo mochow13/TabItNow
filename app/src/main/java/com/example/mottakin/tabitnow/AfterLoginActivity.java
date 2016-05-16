@@ -19,6 +19,7 @@ public class AfterLoginActivity extends AppCompatActivity {
 
     Button joinTournamentButton;
     Button createTournamentButton;
+    Button logoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,18 @@ public class AfterLoginActivity extends AppCompatActivity {
 
         receivedUsername=(TextView)findViewById(R.id.welcomUserTextView);
         receivedUsername.setText("Welcome, "+getIntent().getStringExtra("USER_NAME")+"!");
+
+        logoutButton=(Button)findViewById(R.id.btnLogout);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent=new Intent(AfterLoginActivity.this,splashClass.class);
+                startActivity(intent);
+
+            }
+        });
 
 //        down= (ImageButton) findViewById(R.id.down);
 //
