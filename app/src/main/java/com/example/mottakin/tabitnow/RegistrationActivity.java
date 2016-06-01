@@ -15,7 +15,7 @@ import android.widget.EditText;
 public class RegistrationActivity extends AppCompatActivity {
 
     EditText Name, Username, Institution, Email, PhoneNum, Password, ConfPass;
-    Button regButton;
+    Button regButton, cancelButton;
     AlertDialog.Builder builder;
 
     @Override
@@ -38,21 +38,26 @@ public class RegistrationActivity extends AppCompatActivity {
         Username=(EditText)findViewById(R.id.txtUsername);
         Email=(EditText)findViewById(R.id.txtEmail);
         PhoneNum=(EditText)findViewById(R.id.txtPhone);
-        Institution=(EditText)findViewById(R.id.txtInstitution);
+//        Institution=(EditText)findViewById(R.id.txtInstitution);
         Password=(EditText)findViewById(R.id.txtPassword);
         ConfPass=(EditText)findViewById(R.id.txtConfPassword);
 
         regButton=(Button)findViewById(R.id.btnRegister);
+        cancelButton=(Button)findViewById(R.id.btnCancel);
 
 
         regButton.setOnClickListener(new View.OnClickListener()
             {
                 public void onClick(View v)
                 {
+//                    if(Name.getText().toString().equals("") || Username.getText().toString().equals("")
+//                        || Institution.getText().toString().equals("") || Email.getText().toString().equals("") ||
+//                        PhoneNum.getText().toString().equals("") || Password.getText().toString().equals("") ||
+//                        ConfPass.getText().toString().equals(""))
                     if(Name.getText().toString().equals("") || Username.getText().toString().equals("")
-                        || Institution.getText().toString().equals("") || Email.getText().toString().equals("") ||
-                        PhoneNum.getText().toString().equals("") || Password.getText().toString().equals("") ||
-                        ConfPass.getText().toString().equals(""))
+                            || Email.getText().toString().equals("") ||
+                            PhoneNum.getText().toString().equals("") || Password.getText().toString().equals("") ||
+                            ConfPass.getText().toString().equals(""))
                     {
                         builder=new AlertDialog.Builder(RegistrationActivity.this);
                         builder.setTitle("Something went wrong :(");
@@ -87,13 +92,26 @@ public class RegistrationActivity extends AppCompatActivity {
                     else
                     {
                         BackgroundTask backgroundtask=new BackgroundTask(RegistrationActivity.this);
+//                        backgroundtask.execute("register",Name.getText().toString(),Username.getText().toString(),
+//                                Email.getText().toString(),PhoneNum.getText().toString(),Institution.getText().toString(),
+//                                Password.getText().toString());
+
                         backgroundtask.execute("register",Name.getText().toString(),Username.getText().toString(),
-                                Email.getText().toString(),PhoneNum.getText().toString(),Institution.getText().toString(),
-                                Password.getText().toString());
+                                Email.getText().toString(),PhoneNum.getText().toString(),Password.getText().toString());
                     }
                 }
             }
         );
+
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(RegistrationActivity.this,splashClass.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
 
     }
 

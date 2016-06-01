@@ -36,9 +36,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
     String register_url="http://192.168.10.2/loginapp/register.php";
     String login_url="http://192.168.10.2/loginapp/login.php";
+    String create_url="http://192.168.10.2/loginapp/create_tournament.php";
+    String search_url="http://192.168.10.2/loginapp/archive_search.php";
 
     Context ctx;
     Activity activity;
+
 
     AlertDialog.Builder builder;
     ProgressDialog progressDialog;
@@ -86,14 +89,14 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 String username=params[2];
                 String email=params[3];
                 String phone=params[4];
-                String institution=params[5];
-                String password=params[6];
+//                String institution=params[5];
+                String password=params[5];
 
                 String data= URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"+
                         URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
                         URLEncoder.encode("email","UTF-8")+"="+URLEncoder.encode(email,"UTF-8")+"&"+
                         URLEncoder.encode("phone","UTF-8")+"="+URLEncoder.encode(phone,"UTF-8")+"&"+
-                        URLEncoder.encode("institution","UTF-8")+"="+URLEncoder.encode(institution,"UTF-8")+"&"+
+//                        URLEncoder.encode("institution","UTF-8")+"="+URLEncoder.encode(institution,"UTF-8")+"&"+
                         URLEncoder.encode("password","UTF-8")+"="+URLEncoder.encode(password,"UTF-8");
 
                 bufferedWriter.write(data);
@@ -116,7 +119,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 httpurlconnection.disconnect();
 
-                Thread.sleep(3000);
+                Thread.sleep(1500);
 
                 return stringBuilder.toString().trim();
 
@@ -170,7 +173,130 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 httpurlconnection.disconnect();
 
-                Thread.sleep(3000);
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        else if(method.equals("create_tournament"))
+        {
+            try {
+                URL url=new URL(create_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String codeName=params[1];
+                String compTitle=params[2];
+                String orgClub=params[3];
+                String hostUsername=params[4];
+                String venueName=params[5];
+                String startDate=params[6];
+                String endDate=params[7];
+
+                String data= URLEncoder.encode("compid","UTF-8")+"="+URLEncoder.encode(codeName,"UTF-8")+"&"+
+                        URLEncoder.encode("compname","UTF-8")+"="+URLEncoder.encode(compTitle,"UTF-8")+"&"+
+                        URLEncoder.encode("orgclub","UTF-8")+"="+URLEncoder.encode(orgClub,"UTF-8")+"&"+
+                        URLEncoder.encode("hostuser","UTF-8")+"="+URLEncoder.encode(hostUsername,"UTF-8")+"&"+
+                        URLEncoder.encode("venue","UTF-8")+"="+URLEncoder.encode(venueName,"UTF-8")+"&"+
+                        URLEncoder.encode("startdate","UTF-8")+"="+URLEncoder.encode(startDate,"UTF-8")+"&"+
+                        URLEncoder.encode("enddate","UTF-8")+"="+URLEncoder.encode(endDate,"UTF-8")+"&"+
+                        URLEncoder.encode("champion","UTF-8")+"="+URLEncoder.encode("N/A","UTF-8")+"&"+
+                        URLEncoder.encode("runnerup","UTF-8")+"="+URLEncoder.encode("N/A","UTF-8")+"&"+
+                        URLEncoder.encode("bestspeaker","UTF-8")+"="+URLEncoder.encode("N/A","UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        else if(method.equals("search"))
+        {
+            try {
+                URL url=new URL(search_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String search_query;
+
+                search_query=params[1];
+
+                String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
 
                 return stringBuilder.toString().trim();
 
@@ -228,7 +354,22 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             else if(code.equals("login_false"))
             {
                 showDialog("Login failed!",message,code);
+            }
+            else if(code.equals("creation_false"))
+            {
 
+                showDialog("Failed! :(",message,code);
+            }
+            else if(code.equals("creation_true"))
+            {
+                showDialog("Success! :D",message,code);
+            }
+            else if(code.equals("search"))
+            {
+//                showDialog("Searched successfully!", message, code);
+                Intent intent=new Intent(activity,SearchResultsActivity.class);
+                intent.putExtra("SEARCH_RESULT",message);
+                activity.startActivity(intent);
             }
 
         } catch (JSONException e) {
@@ -242,6 +383,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     {
         builder.setTitle(title);
 
+        final String codeMsg=code;
+
         if(code.equals("reg_true") || code.equals("reg_false"))
         {
             builder.setMessage(message);
@@ -249,7 +392,20 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    activity.finish();
+                    if(codeMsg.equals("reg_true"))
+                        activity.finish();
+                }
+            });
+        }
+        else if(code.equals("creation_true") || code.equals("creation_false"))
+        {
+            builder.setMessage(message);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    if(codeMsg.equals("creation_true"))
+                        activity.finish();
                 }
             });
         }
@@ -271,11 +427,20 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 }
             });
         }
+//        else if(code.equals("search_successful"))
+//        {
+//            builder.setMessage(message);
+//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
+//                }
+//            });
+//        }
 
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
     }
-
 
 }
 

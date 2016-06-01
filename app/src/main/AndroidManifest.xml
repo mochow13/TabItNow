@@ -17,13 +17,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".splashClass">
+        <activity android:name=".splashClass">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".AfterLoginActivity"
@@ -34,11 +33,16 @@
             android:label="@string/title_activity_registration"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".pop"
-            android:theme="@style/AppTheme.trans" />
-        <activity
             android:name=".CreateTournamentActivity"
             android:label="@string/title_activity_create_tournament"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SearchResultsActivity"
+            android:label="Tab it noW - Search Results"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ViewArchiveActivity"
+            android:label="@string/title_activity_view_archive"
             android:theme="@style/AppTheme"></activity>
     </application>
 

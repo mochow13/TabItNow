@@ -4,4 +4,7 @@
     <string name="title_activity_after_log_in">Tab it noW - Welcome!</string>
     <string name="title_activity_registration">Tab it noW - Sign Up!</string>
     <string name="title_activity_create_tournament">Tab it noW - Create Your Own Tourney!</string>
+    <string name="title_activity_search_results">Tab it now! - Search Results</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_view_archive">ViewArchiveActivity</string>
 </resources>

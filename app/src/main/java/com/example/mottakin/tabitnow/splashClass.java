@@ -18,8 +18,8 @@ public class splashClass extends Activity {
     EditText inputPassword;
     Button loginButton;
     Button signupButton;
-
     AlertDialog.Builder builder;
+//    SessionManager session;
 
     @Override
 
@@ -31,6 +31,13 @@ public class splashClass extends Activity {
         inputPassword=(EditText)findViewById(R.id.passwordTextField);
         loginButton=(Button)findViewById(R.id.btnLogin);
         signupButton=(Button)findViewById(R.id.btnSignup);
+//        session=new SessionManager(getApplicationContext());
+
+//        if(session.isLoggedIn())
+//        {
+//            Intent intent=new Intent(splashClass.this,AfterLoginActivity.class);
+//            startActivity(intent);
+//        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +72,14 @@ public class splashClass extends Activity {
                 {
                     BackgroundTask backgroundtask=new BackgroundTask(splashClass.this);
                     backgroundtask.execute("login",inputUsername.getText().toString(),inputPassword.getText().toString());
+
+                    inputUsername.setText("");
+                    inputPassword.setText("");
+//                    boolean status=backgroundtask.getLoginStatus();
+//                    if(status)
+//                    {
+//                        session.createLoginSession(inputUsername.getText().toString(),inputPassword.getText().toString());
+//                    }
                 }
             }
         });

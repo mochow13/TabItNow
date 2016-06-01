@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtCodeName"
             android:layout_gravity="center_horizontal"
-            android:hint="Competition code name (letters and digits only)" />
+            android:hint="Competition code name (letters and digits only)"
+            android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
@@ -39,46 +40,44 @@
             android:ems="10"
             android:id="@+id/txtCompTitle"
             android:layout_gravity="center_horizontal"
-            android:hint="Complete title" />
+            android:hint="Complete title"
+            android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtOrgClub"
             android:layout_gravity="center_horizontal"
-            android:hint="Organizer club initials" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtHostUsername"
-            android:layout_gravity="center_horizontal"
-            android:hint="Host person username" />
+            android:hint="Organizer club initials"
+            android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtVenue"
             android:layout_gravity="center_horizontal"
-            android:hint="Venue" />
+            android:hint="Venue"
+            android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
-            android:id="@+id/txtStartDate"
+            android:id="@+id/dateStart"
             android:layout_gravity="center_horizontal"
-            android:hint="Start date" />
+            android:hint="Start date (YYYY-MM-DD)"
+            android:textStyle="bold" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:ems="10"
-            android:id="@+id/txtEndDate"
+            android:id="@+id/dateEnd"
             android:layout_gravity="center_horizontal"
-            android:hint="End date" />
+            android:hint="End date (YYYY-MM-dd)"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -111,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CANCEL"
-            android:id="@+id/button"
+            android:id="@+id/btnCancel"
             android:layout_weight="1"
             android:textStyle="bold" />
 

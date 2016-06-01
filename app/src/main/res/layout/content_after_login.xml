@@ -67,7 +67,8 @@
                 android:id="@+id/searchTextField"
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="bottom"
-                android:hint="Search" />
+                android:hint="Search to join active competition"
+                android:textColor="@color/abc_primary_text_material_light" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -81,7 +82,8 @@
                 android:layout_height="wrap_content"
                 android:text="GO!"
                 android:id="@+id/btnSearch"
-                android:textColor="@color/abc_primary_text_material_dark" />
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -90,16 +92,24 @@
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
             android:weightSum="1"
-            android:gravity="center">
+            android:gravity="bottom">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchArchiveField"
+                android:layout_gravity="center_horizontal"
+                android:hint="Search archive" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="JOIN TOURNAMENT"
-                android:id="@+id/btnJoinTournament"
+                android:text="VIEW"
+                android:id="@+id/btnShowArchive"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTintMode="multiply"
-                android:textColor="@color/abc_primary_text_material_dark" />
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:textStyle="bold" />
 
             <Button
                 android:layout_width="fill_parent"
@@ -107,20 +117,31 @@
                 android:text="CREATE TOURNAMENT"
                 android:id="@+id/btnCreateTournament"
                 android:layout_gravity="center_horizontal"
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:textStyle="bold" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="MY TOURNAMENTS"
+                android:id="@+id/btnMyTournaments"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
                 android:textColor="@color/abc_primary_text_material_dark" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="LOGOUT"
+                android:id="@+id/btnLogout"
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="LOGOUT"
-        android:id="@+id/btnLogout"
-        android:textColor="@color/abc_primary_text_material_dark"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
