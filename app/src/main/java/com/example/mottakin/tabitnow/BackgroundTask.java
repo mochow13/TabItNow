@@ -38,6 +38,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     String login_url="http://192.168.10.2/loginapp/login.php";
     String create_url="http://192.168.10.2/loginapp/create_tournament.php";
     String search_url="http://192.168.10.2/loginapp/archive_search.php";
+    String search_archive_url="http://192.168.10.2/loginapp/archive_search_only.php";
 
     Context ctx;
     Activity activity;
@@ -85,12 +86,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 OutputStream outputStream=httpurlconnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String name=params[1];
-                String username=params[2];
-                String email=params[3];
-                String phone=params[4];
+                String name=params[1]; name=name.toLowerCase();
+                String username=params[2]; username=username.toLowerCase();
+                String email=params[3]; email=email.toLowerCase();
+                String phone=params[4]; phone=phone.toLowerCase();
 //                String institution=params[5];
-                String password=params[5];
+                String password=params[5]; password=password.toLowerCase();
 
                 String data= URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"+
                         URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
@@ -147,7 +148,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String username, password;
 
-                username=params[1];
+                username=params[1]; username=username.toLowerCase();
                 password=params[2];
 
                 String data=URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
@@ -204,11 +205,11 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 OutputStream outputStream=httpurlconnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String codeName=params[1];
-                String compTitle=params[2];
-                String orgClub=params[3];
-                String hostUsername=params[4];
-                String venueName=params[5];
+                String codeName=params[1]; codeName=codeName.toLowerCase();
+                String compTitle=params[2]; compTitle=compTitle.toLowerCase();
+                String orgClub=params[3]; orgClub=orgClub.toLowerCase();
+                String hostUsername=params[4]; hostUsername=hostUsername.toLowerCase();
+                String venueName=params[5]; venueName=venueName.toLowerCase();
                 String startDate=params[6];
                 String endDate=params[7];
 
@@ -272,7 +273,64 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String search_query;
 
-                search_query=params[1];
+                search_query=params[1]; search_query=search_query.toLowerCase();
+
+                String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        else if(method.equals("search_archive"))
+        {
+            try {
+                URL url=new URL(search_archive_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String search_query;
+
+                search_query=params[1]; search_query=search_query.toLowerCase();
 
                 String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
 
@@ -369,6 +427,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 //                showDialog("Searched successfully!", message, code);
                 Intent intent=new Intent(activity,SearchResultsActivity.class);
                 intent.putExtra("SEARCH_RESULT",message);
+                activity.startActivity(intent);
+            }
+            else if(code.equals("search_archive_only"))
+            {
+                Intent intent=new Intent(activity,ViewArchiveActivity.class);
+                intent.putExtra("ARCHIVE_SEARCH_RESULT",message);
                 activity.startActivity(intent);
             }
 

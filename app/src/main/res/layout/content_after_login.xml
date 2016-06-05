@@ -85,6 +85,22 @@
                 android:textColor="@color/abc_primary_text_material_dark"
                 android:textStyle="bold" />
 
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchArchiveField"
+                android:hint="Search archive"
+                android:textColor="@color/abc_primary_text_material_light" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VIEW"
+                android:id="@+id/btnShowArchive"
+                android:backgroundTintMode="multiply"
+                android:textColor="@color/abc_primary_text_material_dark"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -93,23 +109,6 @@
             android:layout_height="fill_parent"
             android:weightSum="1"
             android:gravity="bottom">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/searchArchiveField"
-                android:layout_gravity="center_horizontal"
-                android:hint="Search archive" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="VIEW"
-                android:id="@+id/btnShowArchive"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTintMode="multiply"
-                android:textColor="@color/abc_primary_text_material_dark"
-                android:textStyle="bold" />
 
             <Button
                 android:layout_width="fill_parent"
