@@ -39,6 +39,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     String create_url="http://192.168.10.2/loginapp/create_tournament.php";
     String search_url="http://192.168.10.2/loginapp/archive_search.php";
     String search_archive_url="http://192.168.10.2/loginapp/archive_search_only.php";
+    String show_my_tournaments_url="http://192.168.10.2/loginapp/show_tournaments.php";
 
     Context ctx;
     Activity activity;
@@ -371,6 +372,61 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             }
 
         }
+        else if(method.equals("show_my_tournaments"))
+        {
+            try {
+                URL url=new URL(show_my_tournaments_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String search_query;
+
+                search_query=params[1]; search_query=search_query.toLowerCase();
+
+                String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         return null;
     }
@@ -433,6 +489,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             {
                 Intent intent=new Intent(activity,ViewArchiveActivity.class);
                 intent.putExtra("ARCHIVE_SEARCH_RESULT",message);
+                activity.startActivity(intent);
+            }
+            else if(code.equals("show_tournaments"))
+            {
+                Intent intent=new Intent(activity,myTournamentsBoard.class);
+                intent.putExtra("ALL_TOURNAMENTS",message);
                 activity.startActivity(intent);
             }
 

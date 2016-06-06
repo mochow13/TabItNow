@@ -14,19 +14,19 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-public class ViewArchiveActivity extends AppCompatActivity {
+public class myTournamentsBoard extends AppCompatActivity {
 
-    ArrayAdapter<String> adapter;
     ListView listView;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_archive);
+        setContentView(R.layout.activity_my_tournaments_board);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final String data=getIntent().getStringExtra("ARCHIVE_SEARCH_RESULT");
+        String data=getIntent().getStringExtra("ALL_TOURNAMENTS");
 
         final ArrayList<String> SearchResults=new ArrayList<>();
         final ArrayList<String> tagOfResults=new ArrayList<>();
@@ -62,7 +62,7 @@ public class ViewArchiveActivity extends AppCompatActivity {
             }
         }
 
-        if(tagOfResults.size()==0) tagOfResults.add("No match found! :(");
+        if(tagOfResults.size()==0) tagOfResults.add("No tournament found! :(");
 
         listView=(ListView)findViewById(R.id.listResults);
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,tagOfResults);
@@ -72,9 +72,9 @@ public class ViewArchiveActivity extends AppCompatActivity {
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent(ViewArchiveActivity.this, ViewSearchDetails.class);
                     String now = SearchResults.get(position);
-                    intent.putExtra("TOURNAMENT_DETAILS", now);
+                    Intent intent=new Intent(myTournamentsBoard.this,addDataToTournament.class);
+                    intent.putExtra("TOURNAMENT_INFO",now);
                     startActivity(intent);
                 }
             });

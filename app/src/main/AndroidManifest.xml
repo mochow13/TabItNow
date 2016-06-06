@@ -38,7 +38,7 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".SearchResultsActivity"
-            android:label="Tab it noW - Search and Join!"
+            android:label="@string/title_activity_search_results"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ViewArchiveActivity"
@@ -47,9 +47,23 @@
         <activity
             android:name=".ViewSearchDetails"
             android:label="@string/title_activity_view_search_details"
-            android:theme="@style/Theme.AppCompat.Dialog">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".SearchJoin"
+            android:label="@string/title_activity_search_join"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".TournamentRegistrationActivity"
+            android:label="@string/title_activity_tournament_registration"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".myTournamentsBoard"
+            android:label="@string/title_activity_my_tournaments_board"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".addDataToTournament"
+            android:label="@string/title_activity_add_data_to_tournament"
+            android:theme="@style/Theme.AppCompat.Dialog"></activity>
     </application>
 
 </manifest>

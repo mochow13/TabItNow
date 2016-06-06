@@ -22,7 +22,7 @@ public class AfterLoginActivity extends AppCompatActivity {
     Button createTournamentButton;
     Button logoutButton;
     Button searchButton;
-
+    Button myTournaments;
 
     EditText searchBar;
     EditText searchBarArchive;
@@ -87,6 +87,16 @@ public class AfterLoginActivity extends AppCompatActivity {
 //                startActivity(intent);
                 BackgroundTask backgroundtask=new BackgroundTask(AfterLoginActivity.this);
                 backgroundtask.execute("search_archive",searchBarArchive.getText().toString());
+            }
+        });
+
+        myTournaments=(Button)findViewById(R.id.btnMyTournaments);
+
+        myTournaments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BackgroundTask backgroundTask=new BackgroundTask(AfterLoginActivity.this);
+                backgroundTask.execute("show_my_tournaments",recUser);
             }
         });
 

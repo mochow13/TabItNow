@@ -8,4 +8,9 @@
     <!--<string name="title_activity_maps">Map</string>-->
     <string name="title_activity_view_archive">Tab it noW - Search Results!</string>
     <string name="title_activity_view_search_details">Tab it noW - Tournament Info!</string>
+    <string name="title_activity_search_join">Join Tournament</string>
+    <string name="title_activity_tournament_registration">Tab it noW - Join Tournament One Step Away!
+    </string>
+    <string name="title_activity_my_tournaments_board">Tab it noW - My Tournaments!</string>
+    <string name="title_activity_add_data_to_tournament">Tab it noW - Load Tournament!</string>
 </resources>
