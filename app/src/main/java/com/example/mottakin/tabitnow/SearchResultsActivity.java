@@ -45,7 +45,7 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         for(String now: SearchResults)
         {
-            StringTokenizer st=new StringTokenizer(now,"_");
+            StringTokenizer st=new StringTokenizer(now,"#");
             int cnt=0;
 
             while(st.hasMoreTokens())

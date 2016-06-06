@@ -1,11 +1,13 @@
 package com.example.mottakin.tabitnow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,8 +28,8 @@ public class ViewArchiveActivity extends AppCompatActivity {
 
         final String data=getIntent().getStringExtra("ARCHIVE_SEARCH_RESULT");
 
-        ArrayList<String> SearchResults=new ArrayList<>();
-        ArrayList<String> tagOfResults=new ArrayList<>();
+        final ArrayList<String> SearchResults=new ArrayList<>();
+        final ArrayList<String> tagOfResults=new ArrayList<>();
 
         String temp="";
 
@@ -41,11 +43,11 @@ public class ViewArchiveActivity extends AppCompatActivity {
             else temp+=data.charAt(i);
         }
 
-        SearchResults.add(temp);
+//        SearchResults.add(temp);
 
         for(String now: SearchResults)
         {
-            StringTokenizer st=new StringTokenizer(now,"_");
+            StringTokenizer st=new StringTokenizer(now,"#");
             int cnt=0;
 
             while(st.hasMoreTokens())
@@ -63,6 +65,16 @@ public class ViewArchiveActivity extends AppCompatActivity {
         listView=(ListView)findViewById(R.id.listResults);
         adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,tagOfResults);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(ViewArchiveActivity.this,ViewSearchDetails.class);
+                String now=SearchResults.get(position);
+                intent.putExtra("TOURNAMENT_DETAILS",now);
+                startActivity(intent);
+            }
+        });
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {

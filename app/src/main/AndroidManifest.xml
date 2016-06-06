@@ -38,12 +38,18 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".SearchResultsActivity"
-            android:label="Tab it noW - Search Results"
+            android:label="Tab it noW - Search and Join!"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ViewArchiveActivity"
             android:label="@string/title_activity_view_archive"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ViewSearchDetails"
+            android:label="@string/title_activity_view_search_details"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
     </application>
 
 </manifest>
