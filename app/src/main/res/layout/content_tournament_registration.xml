@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLayout"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -52,25 +55,30 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <RadioButton
+            <RadioGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Debater"
-                android:id="@+id/radioDebater"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textSize="@dimen/abc_action_bar_content_inset_material"
-                android:checked="false" />
+                android:layout_height="wrap_content">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adjudicator"
-                android:id="@+id/radioAdj"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold"
-                android:textSize="@dimen/abc_action_bar_content_inset_material"
-                android:checked="false" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adjudicator"
+                    android:id="@+id/radioAdj"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:checked="false" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Debater"
+                    android:id="@+id/radioDebater"
+                    android:layout_gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:checked="false" />
+            </RadioGroup>
 
         </LinearLayout>
 

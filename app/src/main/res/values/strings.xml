@@ -13,4 +13,6 @@
     </string>
     <string name="title_activity_my_tournaments_board">Tab it noW - My Tournaments!</string>
     <string name="title_activity_add_data_to_tournament">Tab it noW - Load Tournament!</string>
+    <string name="title_activity_load_tournament">Tab it noW - Load Your Tournament!</string>
+    <string name="title_activity_add_teams">Tab it noW - Load Teams!</string>
 </resources>

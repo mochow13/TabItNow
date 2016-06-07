@@ -74,6 +74,7 @@ public class AfterLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BackgroundTask backgroundtask=new BackgroundTask(AfterLoginActivity.this);
                 backgroundtask.execute("search",searchBar.getText().toString());
+                searchBar.setText("");
             }
         });
 
@@ -87,6 +88,7 @@ public class AfterLoginActivity extends AppCompatActivity {
 //                startActivity(intent);
                 BackgroundTask backgroundtask=new BackgroundTask(AfterLoginActivity.this);
                 backgroundtask.execute("search_archive",searchBarArchive.getText().toString());
+                searchBarArchive.setText("");
             }
         });
 

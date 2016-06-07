@@ -87,12 +87,12 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 OutputStream outputStream=httpurlconnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String name=params[1]; name=name.toLowerCase();
-                String username=params[2]; username=username.toLowerCase();
-                String email=params[3]; email=email.toLowerCase();
-                String phone=params[4]; phone=phone.toLowerCase();
+                String name=params[1]; //name=name.toLowerCase();
+                String username=params[2]; //username=username.toLowerCase();
+                String email=params[3]; //email=email.toLowerCase();
+                String phone=params[4]; //phone=phone.toLowerCase();
 //                String institution=params[5];
-                String password=params[5]; password=password.toLowerCase();
+                String password=params[5]; //password=password.toLowerCase();
 
                 String data= URLEncoder.encode("name","UTF-8")+"="+URLEncoder.encode(name,"UTF-8")+"&"+
                         URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
@@ -149,7 +149,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String username, password;
 
-                username=params[1]; username=username.toLowerCase();
+                username=params[1]; //username=username.toLowerCase();
                 password=params[2];
 
                 String data=URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(username,"UTF-8")+"&"+
@@ -206,11 +206,11 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 OutputStream outputStream=httpurlconnection.getOutputStream();
                 BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
 
-                String codeName=params[1]; codeName=codeName.toLowerCase();
-                String compTitle=params[2]; compTitle=compTitle.toLowerCase();
-                String orgClub=params[3]; orgClub=orgClub.toLowerCase();
-                String hostUsername=params[4]; hostUsername=hostUsername.toLowerCase();
-                String venueName=params[5]; venueName=venueName.toLowerCase();
+                String codeName=params[1]; //codeName=codeName.toLowerCase();
+                String compTitle=params[2]; //compTitle=compTitle.toLowerCase();
+                String orgClub=params[3]; //orgClub=orgClub.toLowerCase();
+                String hostUsername=params[4]; //hostUsername=hostUsername.toLowerCase();
+                String venueName=params[5]; //venueName=venueName.toLowerCase();
                 String startDate=params[6];
                 String endDate=params[7];
 

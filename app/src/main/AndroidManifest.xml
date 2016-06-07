@@ -63,6 +63,14 @@
         <activity
             android:name=".addDataToTournament"
             android:label="@string/title_activity_add_data_to_tournament"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".LoadTournament"
+            android:label="@string/title_activity_load_tournament"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AddTeamsActivity"
+            android:label="@string/title_activity_add_teams"
             android:theme="@style/Theme.AppCompat.Dialog"></activity>
     </application>
 
