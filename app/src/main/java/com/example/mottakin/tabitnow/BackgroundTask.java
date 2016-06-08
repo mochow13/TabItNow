@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.StringTokenizer;
 
 /**
  * Created by mottakin on 5/15/16.
@@ -40,6 +41,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     String search_url="http://192.168.10.2/loginapp/archive_search.php";
     String search_archive_url="http://192.168.10.2/loginapp/archive_search_only.php";
     String show_my_tournaments_url="http://192.168.10.2/loginapp/show_tournaments.php";
+    String add_debater_url="http://192.168.10.2/loginapp/add_debater.php";
+    String join_debater_url="http://192.168.10.2/loginapp/join_debater.php";
+    String add_adj_url="http://192.168.10.2/loginapp/add_adj.php";
+    String currentUser="";
 
     Context ctx;
     Activity activity;
@@ -54,6 +59,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         activity=(Activity)ctx;
     }
 
+    public void setUser(String user)
+    {
+        currentUser=user;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -274,7 +283,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String search_query;
 
-                search_query=params[1]; search_query=search_query.toLowerCase();
+                search_query=params[1]; //search_query=search_query.toLowerCase();
 
                 String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
 
@@ -331,7 +340,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String search_query;
 
-                search_query=params[1]; search_query=search_query.toLowerCase();
+                search_query=params[1]; //search_query=search_query.toLowerCase();
 
                 String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
 
@@ -387,9 +396,222 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String search_query;
 
-                search_query=params[1]; search_query=search_query.toLowerCase();
+                search_query=params[1]; //search_query=search_query.toLowerCase();
 
                 String data=URLEncoder.encode("keywords","UTF-8")+"="+URLEncoder.encode(search_query,"UTF-8");
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        else if(method.contains("add_debater"))
+        {
+            try {
+                URL url=new URL(add_debater_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String tableName, Member, Team, Inst;
+
+                tableName=params[1]; //search_query=search_query.toLowerCase();
+                Member=params[2];
+                Team=params[3];
+                Inst=params[4];
+
+                String js="";
+                String role="debater";
+                String marks="0";
+
+                String data= URLEncoder.encode("tablename","UTF-8")+"="+URLEncoder.encode(tableName,"UTF-8")+"&"+
+                        URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(Member,"UTF-8")+"&"+
+                        URLEncoder.encode("role","UTF-8")+"="+URLEncoder.encode(role,"UTF-8")+"&"+
+                        URLEncoder.encode("joinstatus","UTF-8")+"="+URLEncoder.encode(js,"UTF-8")+"&"+
+                        URLEncoder.encode("institution","UTF-8")+"="+URLEncoder.encode(Inst,"UTF-8")+"&"+
+                        URLEncoder.encode("teamname","UTF-8")+"="+URLEncoder.encode(Team,"UTF-8")+"&"+
+                        URLEncoder.encode("totalmarks","UTF-8")+"="+URLEncoder.encode(marks,"UTF-8");
+
+//                Intent intent=new Intent(activity,DebugActivity.class);
+//                intent.putExtra("DEBUG",data);
+//                activity.startActivity(intent);
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if(method.contains("add_adj"))
+        {
+            try {
+                URL url=new URL(add_adj_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String tableName, Team, Adj, Inst;
+
+                tableName=params[1]; //search_query=search_query.toLowerCase();
+                Adj=params[2];
+                Inst=params[3];
+                Team="N/A";
+
+                String js="";
+                String role="adj";
+                String marks="0";
+
+                String data= URLEncoder.encode("tablename","UTF-8")+"="+URLEncoder.encode(tableName,"UTF-8")+"&"+
+                        URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(Adj,"UTF-8")+"&"+
+                        URLEncoder.encode("role","UTF-8")+"="+URLEncoder.encode(role,"UTF-8")+"&"+
+                        URLEncoder.encode("joinstatus","UTF-8")+"="+URLEncoder.encode(js,"UTF-8")+"&"+
+                        URLEncoder.encode("institution","UTF-8")+"="+URLEncoder.encode(Inst,"UTF-8")+"&"+
+                        URLEncoder.encode("totalmarks","UTF-8")+"="+URLEncoder.encode(marks,"UTF-8")+"&"+
+                        URLEncoder.encode("teamname","UTF-8")+"="+URLEncoder.encode(Team,"UTF-8");
+
+//                Intent intent=new Intent(activity,DebugActivity.class);
+//                intent.putExtra("DEBUG",data);
+//                activity.startActivity(intent);
+
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream=httpurlconnection.getInputStream();
+                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(inputStream));
+
+                StringBuilder stringBuilder=new StringBuilder();
+
+                String line="";
+
+                while((line=bufferedReader.readLine())!=null)
+                {
+                    stringBuilder.append(line+"\n");
+                }
+
+                httpurlconnection.disconnect();
+
+                Thread.sleep(1500);
+
+                return stringBuilder.toString().trim();
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        else if(method.equals("join_tournament"))
+        {
+            try {
+                URL url=new URL(join_debater_url);
+
+                HttpURLConnection httpurlconnection=(HttpURLConnection)url.openConnection();
+                httpurlconnection.setRequestMethod("POST");
+                httpurlconnection.setDoOutput(true);
+                httpurlconnection.setDoInput(true);
+
+                OutputStream outputStream=httpurlconnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(outputStream,"UTF-8"));
+
+                String tableName, User, Club, Team;
+
+                tableName=params[1]; //search_query=search_query.toLowerCase();
+                User=params[2];
+                Club=params[3];
+                Team=params[4];
+                String role=params[5];
+
+                String data= URLEncoder.encode("tablename","UTF-8")+"="+URLEncoder.encode(tableName,"UTF-8")+"&"+
+                        URLEncoder.encode("username","UTF-8")+"="+URLEncoder.encode(User,"UTF-8")+"&"+
+                        URLEncoder.encode("role","UTF-8")+"="+URLEncoder.encode(role,"UTF-8")+"&"+
+                        URLEncoder.encode("institution","UTF-8")+"="+URLEncoder.encode(Club,"UTF-8")+"&"+
+                        URLEncoder.encode("teamname","UTF-8")+"="+URLEncoder.encode(Team,"UTF-8");
+
+//                Intent intent=new Intent(activity,DebugActivity.class);
+//                intent.putExtra("DEBUG",data);
+//                activity.startActivity(intent);
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
@@ -482,6 +704,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             {
 //                showDialog("Searched successfully!", message, code);
                 Intent intent=new Intent(activity,SearchResultsActivity.class);
+                intent.putExtra("USER_NAME",currentUser);
                 intent.putExtra("SEARCH_RESULT",message);
                 activity.startActivity(intent);
             }
@@ -496,6 +719,30 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 Intent intent=new Intent(activity,myTournamentsBoard.class);
                 intent.putExtra("ALL_TOURNAMENTS",message);
                 activity.startActivity(intent);
+            }
+            else if(code.equals("add_debater_true"))
+            {
+                showDialog("Success! :D",message,code);
+            }
+            else if(code.equals("add_debater_false"))
+            {
+                showDialog("Failed! :(", message,code);
+            }
+            else if(code.equals("join_debater_true"))
+            {
+                showDialog("Success! :D", message, code);
+            }
+            else if(code.equals("join_debater_false"))
+            {
+                showDialog("Failed! :(", message, code);
+            }
+            else if(code.equals("add_adj_true"))
+            {
+                showDialog("Success! :D",message,code);
+            }
+            else if(code.equals("add_adj_false"))
+            {
+                showDialog("Failed! :(", message,code);
             }
 
         } catch (JSONException e) {
@@ -532,6 +779,36 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     dialog.dismiss();
                     if(codeMsg.equals("creation_true"))
                         activity.finish();
+                }
+            });
+        }
+        else if(code.equals("add_debater_true") || code.equals("add_debater_false"))
+        {
+            builder.setMessage(message);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        else if(code.equals("add_adj_true") || code.equals("add_adj_false"))
+        {
+            builder.setMessage(message);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        else if(code.equals("join_debater_true") || code.equals("join_debater_false"))
+        {
+            builder.setMessage(message);
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
                 }
             });
         }

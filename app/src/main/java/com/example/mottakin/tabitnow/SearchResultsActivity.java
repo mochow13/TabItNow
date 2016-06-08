@@ -27,6 +27,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final String data=getIntent().getStringExtra("SEARCH_RESULT");
+        final String user=getIntent().getStringExtra("USER_NAME");
 
         final ArrayList<String> SearchResults=new ArrayList<>();
         final ArrayList<String> tagOfResults=new ArrayList<>();
@@ -75,6 +76,7 @@ public class SearchResultsActivity extends AppCompatActivity {
                     Intent intent = new Intent(SearchResultsActivity.this, SearchJoin.class);
                     String now = SearchResults.get(position);
                     intent.putExtra("TOURNAMENT_DETAILS", now);
+                    intent.putExtra("USER_NAME",user);
                     startActivity(intent);
                 }
             });

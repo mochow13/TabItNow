@@ -31,23 +31,11 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtClubInitials"
-                android:hint="Club initials" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtTeamName"
-                android:hint="Team name" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Chose your role:"
+                android:text="Choose your role:"
                 android:id="@+id/txtRole"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
@@ -79,6 +67,26 @@
                     android:textSize="15dp"
                     android:checked="false" />
             </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Enter team name only if you are a debater."
+                android:id="@+id/txtCommand"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtClubInitials"
+                android:hint="Club initials" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTeamName"
+                android:hint="Team name" />
 
         </LinearLayout>
 

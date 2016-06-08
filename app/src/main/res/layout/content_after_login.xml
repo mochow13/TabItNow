@@ -111,6 +111,15 @@
             android:gravity="bottom">
 
             <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ADJUDICATE NOW"
+                android:id="@+id/btnAdjNow"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@color/abc_primary_text_material_dark" />
+
+            <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="CREATE TOURNAMENT"

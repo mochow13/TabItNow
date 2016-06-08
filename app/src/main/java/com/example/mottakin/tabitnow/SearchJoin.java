@@ -26,11 +26,12 @@ public class SearchJoin extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         String foundResult=getIntent().getStringExtra("TOURNAMENT_DETAILS");
+        final String user=getIntent().getStringExtra("USER_NAME");
 
 //        Title=(TextView)findViewById(R.id.txtTitle);
 //        Title.setText(foundResult);
 
-        ArrayList<String> tournamentInfo=new ArrayList<>();
+        final ArrayList<String> tournamentInfo=new ArrayList<>();
 
         StringTokenizer ST=new StringTokenizer(foundResult,"#");
 
@@ -86,6 +87,8 @@ public class SearchJoin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(SearchJoin.this,TournamentRegistrationActivity.class);
+                intent.putExtra("TOURNAMENT_CODE",tournamentInfo.get(0));
+                intent.putExtra("USER_NAME",user);
                 startActivity(intent);
             }
         });

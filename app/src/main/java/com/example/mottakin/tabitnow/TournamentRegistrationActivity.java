@@ -1,6 +1,7 @@
 package com.example.mottakin.tabitnow;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,6 +29,9 @@ public class TournamentRegistrationActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final String tournamentCode=getIntent().getStringExtra("TOURNAMENT_CODE");
+        final String user=getIntent().getStringExtra("USER_NAME");
+
         ClubInitials=(EditText)findViewById(R.id.txtClubInitials);
         TeamName=(EditText)findViewById(R.id.txtTeamName);
 
@@ -51,7 +55,7 @@ public class TournamentRegistrationActivity extends AppCompatActivity {
                 String clubInitial=ClubInitials.getText().toString();
                 String teamName=TeamName.getText().toString();
 
-                if(clubInitial.length()==0 || teamName.length()==0 || (!Debater.isChecked() && !Adjudicator.isChecked()))
+                if((clubInitial.length()==0 || teamName.length()==0) && (!Debater.isChecked() && !Adjudicator.isChecked()))
                 {
                     builder=new AlertDialog.Builder(TournamentRegistrationActivity.this);
                     builder.setTitle("Something went wrong :(");
@@ -62,6 +66,31 @@ public class TournamentRegistrationActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     });
+                }
+                else if(teamName.length()>0 && Adjudicator.isChecked())
+                {
+                    builder=new AlertDialog.Builder(TournamentRegistrationActivity.this);
+                    builder.setTitle("Something went wrong :(");
+                    builder.setMessage("An adjudicator cannot have a team.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                }
+                else
+                {
+//                    Intent intent=new Intent(TournamentRegistrationActivity.this,splashClass.class);
+//                    startActivity(intent);
+                    BackgroundTask backgroundTask=new BackgroundTask(TournamentRegistrationActivity.this);
+                    String role;
+                    if(Adjudicator.isChecked()) role="adj";
+                    else role="debater";
+                    if(Adjudicator.isChecked()) teamName="N/A";
+                    backgroundTask.execute("join_tournament", tournamentCode+"_people", user, clubInitial, teamName, role);
+                    ClubInitials.setText("");
+                    TeamName.setText("");
                 }
             }
         });

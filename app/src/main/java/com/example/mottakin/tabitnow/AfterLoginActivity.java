@@ -23,6 +23,7 @@ public class AfterLoginActivity extends AppCompatActivity {
     Button logoutButton;
     Button searchButton;
     Button myTournaments;
+    Button adjNow;
 
     EditText searchBar;
     EditText searchBarArchive;
@@ -73,6 +74,7 @@ public class AfterLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 BackgroundTask backgroundtask=new BackgroundTask(AfterLoginActivity.this);
+                backgroundtask.setUser(recUser);
                 backgroundtask.execute("search",searchBar.getText().toString());
                 searchBar.setText("");
             }
@@ -99,6 +101,17 @@ public class AfterLoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 BackgroundTask backgroundTask=new BackgroundTask(AfterLoginActivity.this);
                 backgroundTask.execute("show_my_tournaments",recUser);
+            }
+        });
+
+        adjNow=(Button)findViewById(R.id.btnAdjNow);
+
+        adjNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AfterLoginActivity.this,AdjDebateActivity.class);
+                intent.putExtra("ADJ_USER",recUser);
+                startActivity(intent);
             }
         });
 

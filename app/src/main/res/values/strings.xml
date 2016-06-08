@@ -15,4 +15,6 @@
     <string name="title_activity_add_data_to_tournament">Tab it noW - Load Tournament!</string>
     <string name="title_activity_load_tournament">Tab it noW - Load Your Tournament!</string>
     <string name="title_activity_add_teams">Tab it noW - Load Teams!</string>
+    <string name="title_activity_add_adjes">Tab it noW - Add Adjes!</string>
+    <string name="title_activity_adj_debate">Tab it noW - Adjudicate!</string>
 </resources>

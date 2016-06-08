@@ -24,7 +24,7 @@ public class LoadTournament extends AppCompatActivity {
         addAdj=(Button)findViewById(R.id.btnAddAdj);
         addDone=(Button)findViewById(R.id.btnAddDone);
 
-        String tournamentCode=getIntent().getStringExtra("TOURNAMENT_CODE");
+        final String tournamentCode=getIntent().getStringExtra("TOURNAMENT_CODE");
 
         addDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +39,16 @@ public class LoadTournament extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LoadTournament.this,AddTeamsActivity.class);
+                intent.putExtra("TOURNAMENT_CODE",tournamentCode);
+                startActivity(intent);
+            }
+        });
+
+        addAdj.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoadTournament.this,AddAdjesActivity.class);
+                intent.putExtra("TOURNAMENT_CODE",tournamentCode);
                 startActivity(intent);
             }
         });

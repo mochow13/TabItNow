@@ -71,7 +71,16 @@
         <activity
             android:name=".AddTeamsActivity"
             android:label="@string/title_activity_add_teams"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".DebugActivity" />
+        <activity
+            android:name=".AddAdjesActivity"
+            android:label="@string/title_activity_add_adjes"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".AdjDebateActivity"
+            android:label="@string/title_activity_adj_debate"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

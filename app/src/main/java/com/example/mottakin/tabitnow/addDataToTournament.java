@@ -27,7 +27,7 @@ public class addDataToTournament extends AppCompatActivity {
 
         String foundData=getIntent().getStringExtra("TOURNAMENT_INFO");
 
-        ArrayList<String> tournamentInfo=new ArrayList<>();
+        final ArrayList<String> tournamentInfo=new ArrayList<>();
 
         StringTokenizer ST=new StringTokenizer(foundData,"#");
 
@@ -78,7 +78,7 @@ public class addDataToTournament extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(addDataToTournament.this,LoadTournament.class);
-                intent.putExtra("TOURNAMENT_CODE",Code.getText().toString());
+                intent.putExtra("TOURNAMENT_CODE",tournamentInfo.get(0));
                 startActivity(intent);
             }
         });
